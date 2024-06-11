@@ -131,7 +131,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
             </div>
           )}
         </div>
-      ) : <video src={loader}></video>}
+      ) : <div className='flex justify-center font-bold items-center relative top-20'><h1 className='text-3xl text-center'>Loading.....</h1></div>}
     </div>
   );
 };
