@@ -9,6 +9,7 @@ import { FaMapMarkedAlt } from 'react-icons/fa';
 import Contact from '../Components/Contact';
 import { FaStar } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import loader from '../logo/loading.mp4'
 
 const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
   const [list, setList] = useState([]);
@@ -130,7 +131,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
             </div>
           )}
         </div>
-      ) : 'No images found'}
+      ) : <video src={loader}></video>}
     </div>
   );
 };
