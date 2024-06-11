@@ -14,7 +14,7 @@ const Signup = ({user,setUser}) => {
   })
   const handleFetch =(async()=>{
     try {
-      await axios.post("http://localhost:3001/detail/get",{email:formData.email})
+      await axios.post("https://dualdealmart.onrender.com/detail/get",{email:formData.email})
       .then((res)=>{
         setUser(res.data)
       })
@@ -26,7 +26,7 @@ const Signup = ({user,setUser}) => {
   const handleSubmit=(async(e)=>{
     e.preventDefault()
    try {
-     await axios.post("http://localhost:3001/api/signup",{...formData,photo:'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'})
+     await axios.post("https://dualdealmart.onrender.com/api/signup",{...formData,photo:'https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png'})
      
     .then((res)=>{
        if(res.data==="user"){

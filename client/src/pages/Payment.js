@@ -5,7 +5,7 @@ const Payment = ({user,setUser}) => {
 const Navigate = useNavigate()
   const handleFetch = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/detail/get", { email: user.email });
+      const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: user.email });
       setUser(response.data);
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -30,7 +30,7 @@ const Navigate = useNavigate()
             const month =dateMonth.getMonth() + 1
             const year =dateMonth.getFullYear()
             const count = 0
-            axios.post('http://localhost:3001/pay/month',{paymentId,email,date,month,count,year})
+            axios.post('https://dualdealmart.onrender.com/pay/month',{paymentId,email,date,month,count,year})
             .then((res)=>{
                 if(res.data==='paid'){
                     handleFetch()

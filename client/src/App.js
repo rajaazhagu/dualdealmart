@@ -18,7 +18,7 @@ const App = () => {
         const [fetch,setFetch] = useState(false)
         const [userRating,setUserRating]=useState(false)
   useEffect(() => {
-    axios.get('http://localhost:3001/get/lists')
+    axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res) => {
         if (res.data) {
           setList(res.data.data);

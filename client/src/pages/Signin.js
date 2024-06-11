@@ -12,7 +12,7 @@ const Signin = ({user,setUser}) => {
   })
   const handleFetch =(async()=>{
     try {
-      await axios.post("http://localhost:3001/detail/get",{email:formData.email})
+      await axios.post("https://dualdealmart.onrender.com/detail/get",{email:formData.email})
       .then((res)=>{
         setUser(res.data)
       })
@@ -25,7 +25,7 @@ const Signin = ({user,setUser}) => {
     
     e.preventDefault()
    try {
-      axios.post("http://localhost:3001/user/signin",formData)
+      axios.post("https://dualdealmart.onrender.com/user/signin",formData)
      
     .then((res)=>{
        if(res.data==="success"){

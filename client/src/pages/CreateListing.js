@@ -70,7 +70,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
               toast.error("price should be greater than discount price")
               return
         }
-        await axios.post("http://localhost:3001/create/List",formData)
+        await axios.post("https://dualdealmart.onrender.com/create/List",formData)
       
         .then((res)=>{
             if(res.data==='created'){

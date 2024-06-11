@@ -28,7 +28,7 @@ const Profile = ({ user, setUser}) => {
   }, [file]);
   const handleFetch = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/detail/get", { email: formData.email });
+      const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: formData.email });
       setUser(response.data);
     } catch (error) {
       console.error('Error fetching user details:', error);
@@ -74,7 +74,7 @@ const Profile = ({ user, setUser}) => {
     e.preventDefault();
     try {
       const oldmail = user.email;
-      const response = await axios.post("http://localhost:3001/update/user", { ...formData, oldmail });
+      const response = await axios.post("https://dualdealmart.onrender.com/update/user", { ...formData, oldmail });
       if (response.data === 'updated') {
         toast.success('Profile updated successfully');
         handleFetch();
@@ -90,7 +90,7 @@ const Profile = ({ user, setUser}) => {
 
   const handleDelete=(async()=>{
      try {
-       await axios.post('http://localhost:3001/delete/profile',{email:user.email})
+       await axios.post('https://dualdealmart.onrender.com/delete/profile',{email:user.email})
        .then((res)=>{
            if(res.data==='deleted'){
             toast.success("Profile deleted")
@@ -114,7 +114,7 @@ const Profile = ({ user, setUser}) => {
 
   const handleShow =(async()=>{
     try {
-      await axios.get('http://localhost:3001/get/lists')
+      await axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res)=>{
         if(res.data){
           const data =res.data.data.filter((single)=>(user.email===single.email))
@@ -128,7 +128,7 @@ const Profile = ({ user, setUser}) => {
 
  const handleDeleteList =(async(id)=>{
   try {
-    await axios.post("http://localhost:3001/lists/delete",{id})
+    await axios.post("https://dualdealmart.onrender.com/lists/delete",{id})
     .then((res)=>{
         if(res.data==='deleted'){
           toast.success('deleted')

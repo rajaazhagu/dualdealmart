@@ -40,7 +40,7 @@ const Home = ({list,user}) => {
           break;
        }      
       }
-      await axios.post('http://localhost:3001/count/update',{count,email})
+      await axios.post('https://dualdealmart.onrender.com/count/update',{count,email})
     } catch (error) {
       alert(error)
     }

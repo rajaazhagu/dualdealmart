@@ -20,7 +20,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
   const refer = useRef();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/get/lists')
+    axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res) => {
         if (res.data) {
           const data = res.data.data.filter((single) => single._id === param.listingId);
@@ -37,7 +37,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
           const total = totalRating / data[0].rating.length;
           setUserRating(total);
           const id = data[0]._id;
-          axios.post('http://localhost:3001/total/review', { total, id });
+          axios.post('https://dualdealmart.onrender.com/total/review', { total, id });
           setFetch(!fetch);
         }
       })
@@ -51,7 +51,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
       const userEmail = [user.email, ...list[0].userEmail];
       const id = list[0]._id;
       const review = [...list[0].rating, rating];
-      await axios.post("http://localhost:3001/review/change", { review, userEmail, id })
+      await axios.post("https://dualdealmart.onrender.com/review/change", { review, userEmail, id })
         .then((res) => {
           if (res.data === 'review') {
             toast.success(`Reviewed successfully for ${list[0].name}`);

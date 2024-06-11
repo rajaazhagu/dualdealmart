@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const OAuth = ({user,setUser}) => {
      const Fetchdata=(async(result)=>{
         try {
-            await axios.post("http://localhost:3001/detail/get",{email:result.user.email})
+            await axios.post("https://dualdealmart.onrender.com/detail/get",{email:result.user.email})
             .then((res)=>{
                setUser(res.data)
             })
@@ -24,7 +24,7 @@ const OAuth = ({user,setUser}) => {
         const provider = new GoogleAuthProvider();
         const auth =  getAuth(app)
         const result = await signInWithPopup(auth,provider)
-        await axios.post("http://localhost:3001/auth/google",{name:result.user.displayName,email:result.user.email,photo:result.user.photoURL})
+        await axios.post("https://dualdealmart.onrender.com/auth/google",{name:result.user.displayName,email:result.user.email,photo:result.user.photoURL})
         .then((res)=>{
              if(res.data==="ok"){
                 toast.success("login successful")
