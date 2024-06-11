@@ -7,8 +7,8 @@ const Header = ({user,search,setSearch}) => {
     <div className='bg-slate-300 shadow-md'>
       <div className='flex justify-between items-center p-3 max-w-6xl mx-auto'>
         <Link to='/'>
-          <div className='flex gap-2 items-end'>
-           <img src={logo} alt='logo' className='rounded-3xl h-12 w-12'/>
+          <div className='flex gap-2 items-end relative right-2'>
+           <img src={logo} alt='logo' className='rounded-3xl h-10 w-10'/>
            <h1 className='hidden lg:block font-bold text-2xl'>Dual<span className='text-slate-700'>Deal</span><span className='text-slate-500'>Mart</span></h1>
            </div>
           </Link>
@@ -18,10 +18,10 @@ const Header = ({user,search,setSearch}) => {
           </form>
           <ul className='flex gap-4'>
             <Link to='/'>
-                <li className='hidden sm:inline text-slate-700 hover:text-red-500'>Home</li>
+                <li className='hidden sm:inline text-slate-700 hover:text-red-500 font-semibold'>Home</li>
             </Link>
             <Link to='/about'>
-                <li className='hidden sm:inline text-slate-700 hover:text-red-500'>About</li>
+                <li className='sm:inline text-slate-700 hover:text-red-500 font-semibold'>about</li>
             </Link>
             {user
             ?
@@ -30,7 +30,7 @@ const Header = ({user,search,setSearch}) => {
             </Link>
             :  
             <Link to='/sign-in'>
-               <li className='text-slate-700 ml--9 hover:text-red-500'>Signin</li>
+               <li className='text-slate-700 ml--9 hover:text-red-500 font-semibold'>Signin</li>
             </Link>}
             
           

@@ -60,7 +60,7 @@ const Home = ({list,user}) => {
         <div className='text-gray-400 text-xs sm:text-sm '>
           RajaEstate is the place to find your next perfect
           <br/>
-          we have wide varieties of categories to choose from us.
+          we have wide varieties of categories to choose from us.<span className='text-black font-bold'>Rent it,Own it,Love it...</span>
         </div>
       </div>
          {
