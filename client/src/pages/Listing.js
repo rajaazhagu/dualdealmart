@@ -9,7 +9,7 @@ import { FaMapMarkedAlt } from 'react-icons/fa';
 import Contact from '../Components/Contact';
 import { FaStar } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import loader from '../logo/loading.mp4'
+import Description from './Description';
 
 const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
   const [list, setList] = useState([]);
@@ -82,17 +82,22 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
           </Swiper>
           <h1 className='text-slate-600 text-2xl text-center my-2'><span className='text-black text-2xl font-bold'>Category: </span>{list[0].name}</h1>
           <h1 className='text-slate-600 text-2xl text-center my-2'><span className='text-2xl text-center text-black font-bold'>Price: </span>${list[0].price}{list[0].type === 'rent' && '/month'}</h1>
-          <p className='flex items-center justify-center mt-6 gap-2 text-slate-600 my-2 text-1xl'>
-            <FaMapMarkedAlt className='text-green-600 text-center' />
+          <p className='flex items-center justify-center mt-6  text-slate-600 my-2 text-1xl'>
+            <FaMapMarkedAlt className='text-green-600 text-center w-20 h-30' />
             {list[0].address}
           </p>
           <div className='flex flex-row gap-2 justify-center'>
             <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-lg'>{list[0].type === 'rent' ? 'For Rent' : 'For Sale'}</p>
             {list[0].offer && <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-lg'>${list[0].price - list[0].discountprice} discount</p>}
           </div>
-          <p className='text-slate-800 sm:text-center ml-2'><span className='font-semibold text-black'>Description</span> - {list[0].description}</p>
+           <Description list={list}/>
+          {list[0].type==='sell'&& user &&
+              <div className='flex justify-center'>
+                <button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button>
+              </div>
+          }
           <div className='flex justify-center gap-4 w-100'>
-            {user && !contact ? <button onClick={() => setContact(true)} className='bg-slate-700 w-60 h-8 rounded-lg text-white my-2'>Mail</button> : !user ? <Link to='/sign-in' className='bg-slate-700 w-60 h-8 rounded-lg text-white text-center'>Sign-in</Link> : ''}
+            {user && !contact ? <button onClick={() => setContact(true)} className='bg-slate-700 w-60 h-8 rounded-lg text-white my-2'>Mail</button> : !user ? <Link to='/sign-in' className='bg-slate-700 w-60 h-8 rounded-lg text-white text-center my-5'>Sign-in</Link> : ''}
             {contact && user ? <Contact list={list} /> : ''}
             {(user && !contact) && <p className='font-bold my-2'>or</p>}
             {(user && !contact) && <p className='bg-slate-700 w-60 h-8 rounded-lg text-white text-center my-2'>Call: {list[0].phone}</p>}
