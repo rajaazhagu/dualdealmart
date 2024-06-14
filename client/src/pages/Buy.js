@@ -23,7 +23,7 @@ const Buy = ({ buy, user }) => {
   };
 
   return (
-    <div>
+    <div className='max-w-[400px] mx-auto'>
       {user ? (
         <form
           ref={form}
