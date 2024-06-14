@@ -11,7 +11,8 @@ import { FaStar } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Description from './Description';
 
-const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
+
+const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setbuy }) => {
   const [list, setList] = useState([]);
   const [contact, setContact] = useState(false);
   const [rating, setRating] = useState([]);
@@ -20,6 +21,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
   const param = useParams();
   const refer = useRef();
 
+
   useEffect(() => {
     axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res) => {
@@ -27,6 +29,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
           const data = res.data.data.filter((single) => single._id === param.listingId);
           console.log(data);
           setList(data);
+          setbuy(data);
           const dataLength = data[0].userEmail.length;
           for (let i = 0; i < dataLength; i++) {
             if (data[0].userEmail[i] === user.email) {
@@ -93,7 +96,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch }) => {
            <Description list={list}/>
           {list[0].type==='sell'&& user &&
               <div className='flex justify-center'>
-                <button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button>
+                <Link to="/buy"><button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button></Link>
               </div>
           }
           <div className='flex justify-center gap-4 w-100'>

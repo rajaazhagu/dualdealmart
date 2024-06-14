@@ -10,9 +10,11 @@ import Header from './Components/Header'
 import CreateListing from './pages/CreateListing'
 import Listing from './pages/Listing'
 import Payment from './pages/Payment';
+import Buy from './pages/Buy';
 
 const App = () => {
         const [user,setUser] = useState('')
+        const [buy,setbuy] =useState([])
         const [list,setList] = useState([])
         const [search,setSearch] =useState('')
         const [fetch,setFetch] = useState(false)
@@ -39,8 +41,9 @@ const App = () => {
                 <Route path='/about' element={<About/>}/>
                 <Route path='/profile' element={<Profile user={user} setUser={setUser} />}/>
                 <Route path='/create-Listing' element={<CreateListing user={user} fetch={fetch} setFetch={setFetch} />}/>
-                <Route path='/listing/:listingId' element={<Listing user={user} userRating={userRating} setUserRating={setUserRating} setFetch={setFetch} fetch={fetch}/>}/>
+                <Route path='/listing/:listingId' element={<Listing user={user} userRating={userRating} setUserRating={setUserRating} setFetch={setFetch} fetch={fetch} setbuy={setbuy}/>}/>
                 <Route path='/payment' element={<Payment user={user} setUser={setUser}/>}/>
+                <Route path='/buy' element={<Buy list={list} user={user} buy={buy}/>}/>
           </Routes>
    </div>
   )
