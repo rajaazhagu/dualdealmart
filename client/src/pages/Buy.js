@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import emailjs from 'emailjs-com';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Buy = ({ buy, user }) => {
   const form = useRef();
-
+  const navigate =useNavigate()
   const sendEmail = (e) => {
     e.preventDefault();
 
@@ -11,7 +13,8 @@ const Buy = ({ buy, user }) => {
       .sendForm('service_y7xj0zf', 'template_idu1t8y', form.current, 'kAmXiNVYiUnGKFlVQ')
       .then(
         () => {
-          console.log('SUCCESS!');
+          toast.success('submitted');
+          navigate('/');
         },
         (error) => {
           console.log('FAILED...', error.text);
