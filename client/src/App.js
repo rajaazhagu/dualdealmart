@@ -11,6 +11,10 @@ import CreateListing from './pages/CreateListing'
 import Listing from './pages/Listing'
 import Payment from './pages/Payment';
 import Buy from './pages/Buy';
+import Contact from './pages/Contactus';
+import Privacy from './pages/privacy';
+import Terms from './pages/Terms';
+import Refund from './pages/Refund';
 
 const App = () => {
         const [user,setUser] = useState('')
@@ -44,6 +48,10 @@ const App = () => {
                 <Route path='/listing/:listingId' element={<Listing user={user} userRating={userRating} setUserRating={setUserRating} setFetch={setFetch} fetch={fetch} setbuy={setbuy}/>}/>
                 <Route path='/payment' element={<Payment user={user} setUser={setUser}/>}/>
                 <Route path='/buy' element={<Buy list={list} user={user} buy={buy}/>}/>
+                <Route path='/contactus' element={<Contact/>}/>
+                <Route path='/privacypolicy' element={<Privacy/>}/>
+                <Route path='/terms and condition' element={<Terms/>}/>
+                <Route path='/refund' element={<Refund/>}/>
           </Routes>
    </div>
   )
