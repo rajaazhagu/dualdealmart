@@ -58,6 +58,14 @@ const Signup = ({user,setUser}) => {
         <p>Have an Account?</p>
         <Link to='/sign-in'><span className='text-blue-700'>Signin</span></Link>
       </div>
+      <div className='flex gap-2 mt-3 justify-center text-blue-700'>
+        <Link to='/contactus'>contact |</Link>
+        <Link to='/privacypolicy'>privacypolicy |</Link>
+      </div>
+      <div className='flex gap-2 mt-3 justify-center text-blue-700'>
+      <Link to='/terms and condition'>Terms and conditions |</Link>
+      <Link to='/refund'>Refund</Link>
+      </div>
     </div>
   )
 }
