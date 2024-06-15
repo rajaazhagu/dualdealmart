@@ -64,7 +64,7 @@ const Signin = ({user,setUser}) => {
         <Link to='/privacypolicy'>privacypolicy |</Link>
       </div>
       <div className='flex gap-2 mt-3 justify-center text-blue-700'>
-      <Link to='/terms and condition'>Terms and conditions |</Link>
+      <Link to='/termsandcondition'>Terms and conditions |</Link>
       <Link to='/refund'>Refund</Link>
       </div>
     </div>

@@ -50,7 +50,7 @@ const App = () => {
                 <Route path='/buy' element={<Buy list={list} user={user} buy={buy}/>}/>
                 <Route path='/contactus' element={<Contact/>}/>
                 <Route path='/privacypolicy' element={<Privacy/>}/>
-                <Route path='/terms and condition' element={<Terms/>}/>
+                <Route path='/termsandcondition' element={<Terms/>}/>
                 <Route path='/refund' element={<Refund/>}/>
           </Routes>
    </div>
