@@ -11,8 +11,8 @@ app.use(cors());
 app.use(express.json());
 dotenv.config();
 app.use(express.urlencoded({ extended: true }));
-Cashfree.XClientId='70289744cdf2b19771f93acdf4798207'
-Cashfree.XClientSecret='cfsk_ma_prod_b6534c0b38999ccb90b003ea95d8ea74_a6cedfa9'
+Cashfree.XClientId=process.env.CLIENT_ID
+Cashfree.XClientSecret=process.env.CLIENT_SECRET
 Cashfree.XEnvironment=Cashfree.Environment.PRODUCTION
 function getOrderId() {
   const unique = crypto.randomBytes(8).toString('hex');
@@ -39,7 +39,6 @@ app.get("/payment", async (req, res) => {
 
     // Call Cashfree PGCreateOrder method
     const response = await Cashfree.PGCreateOrder("2023-08-01", request);
-    console.log(response.data);
     res.json(response.data); // Return response to client
   } catch (error) {
     console.error("Error creating order:", error);
