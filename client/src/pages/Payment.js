@@ -10,7 +10,7 @@ const Payment = () => {
     const initializeCashfree = async () => {
       try {
         cashfree = await load({
-          mode: 'production'
+          mode: 'sandbox'
         });
         console.log('Cashfree initialized');
       } catch (error) {
