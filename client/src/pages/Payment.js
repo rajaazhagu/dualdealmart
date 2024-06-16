@@ -1,60 +1,63 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-const Payment = ({user,setUser}) => {
-const Navigate = useNavigate()
-  const handleFetch = async () => {
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { load } from '@cashfreepayments/cashfree-js';
+
+const Payment = () => {
+  const [orderId, setOrderId] = useState('');
+  let cashfree;
+
+  useEffect(() => {
+    const initializeCashfree = async () => {
+      try {
+        cashfree = await load({
+          mode: 'production'
+        });
+        console.log('Cashfree initialized');
+      } catch (error) {
+        console.error('Error initializing Cashfree:', error);
+      }
+    };
+
+    initializeCashfree();
+  }, []); // Empty dependency array ensures this effect runs only once
+
+  const getSessionId = async () => {
     try {
-      const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: user.email });
-      setUser(response.data);
+      const res = await axios.get("https://dualdealmart.onrender.com/payment");
+      
+      if (res.data && res.data.payment_session_id) {
+        console.log(res.data);
+        setOrderId(res.data.order_id); // Update orderId state
+        return res.data.payment_session_id;
+      }
     } catch (error) {
-      console.error('Error fetching user details:', error);
+      console.error('Error fetching sessionId:', error);
     }
   };
 
-  const email =user.email
-  const handleSubmit = () => {
-    var options = {
-      key: "rzp_test_x1H9K6rRM1TwVT",
-      key_secret: "iOYDfzDLqCKhmXztUIjOupI4",
-      amount: 50*100,
-      currency: "INR",
-      name: "Sale and Rent",
-      description: "for testing purpose",
-      handler: function (response) {
-        try {
-            
-            const paymentId = response.razorpay_payment_id;
-            const dateMonth = new Date()
-            const date = dateMonth.getDate()
-            const month =dateMonth.getMonth() + 1
-            const year =dateMonth.getFullYear()
-            const count = 0
-            axios.post('https://dualdealmart.onrender.com/pay/month',{paymentId,email,date,month,count,year})
-            .then((res)=>{
-                if(res.data==='paid'){
-                    handleFetch()
-                    Navigate('/')
-                }
-            })
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const sessionId = await getSessionId();
 
-        } catch (error) {
-            alert(error)
-        }
-       
-      },
-      theme: {
-        color: "#07a291db",
-      },
-    };
-    var pay = new window.Razorpay(options);
-            pay.open();
+      if (sessionId) {
+        const checkOutOptions = {
+          paymentSessionId: sessionId,
+          redirectTarget: '_modal'
+        };
+
+        cashfree.checkout(checkOutOptions).then((response) => {
+          console.log('Payment success:', response);
+        });
+      }
+    } catch (error) {
+      console.error('Error during checkout:', error);
+    }
   };
 
   return (
-    <div className="flex justify-center flex-col items-center relative top-60">
-      <button className="text-white bg-red-700 rounded-lg p-3 text-center uppercase hover:opacity-85" onClick={(()=>handleSubmit())}>Pay just 50 to create unlimited lists</button>
-      <p className="font-semibold"> Press pay button and please wait until razor pay redirects to home page.Dont press any keys</p>
+    <div>
+      <button onClick={handleClick}>Pay</button>
     </div>
   );
 };

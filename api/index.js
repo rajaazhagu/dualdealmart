@@ -4,10 +4,48 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const route = require("./routes/routes");
+const { Cashfree } = require('cashfree-pg');
+const crypto = require('crypto');
 
 app.use(cors());
 app.use(express.json());
 dotenv.config();
+app.use(express.urlencoded({ extended: true }));
+Cashfree.XClientId='70289744cdf2b19771f93acdf4798207'
+Cashfree.XClientSecret='cfsk_ma_prod_b6534c0b38999ccb90b003ea95d8ea74_a6cedfa9'
+Cashfree.XEnvironment=Cashfree.Environment.PRODUCTION
+function getOrderId() {
+  const unique = crypto.randomBytes(8).toString('hex');
+  return unique.substr(0, 12); // 12 characters long
+}
+
+// Endpoint to initiate payment
+app.get("/payment", async (req, res) => {
+  try {
+    const orderId = getOrderId();
+    
+    // Payment request payload
+    const request = {
+      order_amount: "1.00",
+      order_currency: "INR",
+      order_id: orderId,
+      customer_details: {
+        customer_id: "kjnv123",
+        customer_phone: "9999999999",
+        customer_name: "njn",
+        customer_email: "azhagu@gmail.com"
+      }
+    };
+
+    // Call Cashfree PGCreateOrder method
+    const response = await Cashfree.PGCreateOrder("2023-08-01", request);
+    console.log(response.data);
+    res.json(response.data); // Return response to client
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).json({ error: "Failed to create order" });
+  }
+});
 
 // Ensure routes are correctly mounted
 app.use("/api", route);
@@ -29,6 +67,6 @@ mongoose.connect(
   "mongodb+srv://azhaguazhagu30:j2oW5hkGVUwR2tG7@cluster0.ipwnl5f.mongodb.net/dualdealmart?retryWrites=true&w=majority&appName=Cluster0"
 );
 
-app.listen(process.env.PORT || 3001, () => {
+app.listen(process.env.PORT || 3002, () => {
   console.log("Server connected");
 });
