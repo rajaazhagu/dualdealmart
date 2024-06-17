@@ -35,7 +35,7 @@ const Payment = ({user,setUser}) => {
 
   const getSessionId = async () => {
     try {
-      const res = await axios.post("https://dualdealmart.onrender.com/payment",{email:user.email,name:user.name});
+      const res = await axios.get("https://dualdealmart.onrender.com/payment");
       
       if (res.data && res.data.payment_session_id) {
         setOrderId(res.data.order_id); // Update orderId state
