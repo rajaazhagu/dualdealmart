@@ -60,7 +60,7 @@ app.use('/Create',route)
 app.use('/get',route)
 app.use('/lists',route)
 app.use('/pay',route)
-app.use('/count',route)
+//app.use('/count',route)
 app.use('/review',route)
 app.use('/total',route)
 

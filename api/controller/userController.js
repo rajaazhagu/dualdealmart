@@ -137,11 +137,11 @@ const deleteList=(async(req,res)=>{
 })
 
 const payMonth =(async(req,res)=>{
-  const {email,date,month,count,year} =req.body
+  const {email,date,month,year} =req.body
   try {
     const data = await User.findOne({email:email})
     if(data){
-      await User.updateOne({email:email},{$set:{date:date,month:month,count:count,year:year}})
+      await User.updateOne({email:email},{$set:{date:date,month:month,year:year}})
       res.json('paid')
     }
   } catch (error) {
@@ -149,7 +149,7 @@ const payMonth =(async(req,res)=>{
   }
 })
 
-const countUpdate=(async(req,res)=>{
+/*const countUpdate=(async(req,res)=>{
   const {count,email} = req.body
   try {
    await User.updateOne({email:email},{$set:{count:count}})
@@ -158,7 +158,7 @@ const countUpdate=(async(req,res)=>{
   } catch (error) {
     console.log('error')
   }
-})
+})*/
 
 const reviewUpdate =(async(req,res)=>{
   const {review,userEmail,id} =req.body

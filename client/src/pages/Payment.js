@@ -46,13 +46,12 @@ const Payment = ({user}) => {
         };
 
         cashfree.checkout(checkOutOptions).then(async(response) => {
-          let count =0;
           let dateMonth = new Date()
           let date = dateMonth.getDate()
           let month = dateMonth.getMonth()+1
           let year = dateMonth.getFullYear()
           let email=user.email
-          await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,count,year})
+          await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,year})
         });
       }
     } catch (error) {

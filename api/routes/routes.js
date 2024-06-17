@@ -13,7 +13,7 @@ router.post("/List",userController.createList)
 router.get("/lists",userController.getList)
 router.post("/delete",userController.deleteList)
 router.post("/month",userController.payMonth)
-router.post("/update",userController.countUpdate)
+//router.post("/update",userController.countUpdate)
 router.post("/change",userController.reviewUpdate)
 router.post("/review",userController.TotalReview)
 

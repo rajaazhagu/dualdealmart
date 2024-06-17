@@ -28,10 +28,6 @@ const userSchema = new mongoose.Schema({
         type:Number,
         required:false
     },
-    count:{
-        type:Number,
-        required:false
-    },
     year:{
         type:Number,
         required:false

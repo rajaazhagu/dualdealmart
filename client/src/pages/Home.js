@@ -7,7 +7,7 @@ import { FaStar } from 'react-icons/fa';
 const Home = ({list,user}) => {
      
   const dateMonth = new Date()
-  const handlePost =(async()=>{
+ /* const handlePost =(async()=>{
     try {
       let date = dateMonth.getDate()
       let month = dateMonth.getMonth()+1
@@ -49,7 +49,7 @@ const Home = ({list,user}) => {
     if(user.date){
       handlePost()
     }
-  },[user])
+  },[user])*/
 
   
  
