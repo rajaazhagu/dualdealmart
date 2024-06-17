@@ -43,7 +43,7 @@ const Payment = () => {
       if (sessionId) {
         const checkOutOptions = {
           paymentSessionId: sessionId,
-          redirectTarget: '_modal'
+          redirectTarget: '_self'
         };
 
         cashfree.checkout(checkOutOptions).then((response) => {
