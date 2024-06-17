@@ -26,13 +26,16 @@ const Payment = ({user}) => {
     let id = user.order_id
     let name = user.name
     try {
-      const res = await axios.post("https://dualdealmart.onrender.com/payment",{email,id,name});
+      await axios.post("https://dualdealmart.onrender.com/payment",{email,id,name})
+      .then((res)=>{
+        if (res.data && res.data.payment_session_id) {
+          console.log(res.data.transaction_id);
+          setOrderId(res.data.order_id); // Update orderId state
+          return res.data.payment_session_id;
+        }
+      })
       
-      if (res.data && res.data.payment_session_id) {
-        console.log(res.data.transaction_id);
-        setOrderId(res.data.order_id); // Update orderId state
-        return res.data.payment_session_id;
-      }
+      
     } catch (error) {
       console.error('Error fetching sessionId:', error);
     }
