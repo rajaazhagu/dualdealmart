@@ -58,7 +58,7 @@ const Payment = ({user,setUser}) => {
         };
 
         cashfree.checkout(checkOutOptions).then(async(response) => {
-          console.log(response)
+          if(response.paymentDetails.paymentMessage==='Payment finished. Check status.'){
           let dateMonth = new Date()
           let date = dateMonth.getDate()
           let month = dateMonth.getMonth()+1
@@ -68,7 +68,7 @@ const Payment = ({user,setUser}) => {
           handleFetch()
           navigate('/')
           toast.success('payment successful');
-
+          }
         });
       }
     } catch (error) {

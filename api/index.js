@@ -22,6 +22,7 @@ function getOrderId() {
 }
 
 
+
 // Endpoint to initiate payment
 app.get("/payment", async (req, res) => {
   try {
@@ -36,7 +37,7 @@ app.get("/payment", async (req, res) => {
         customer_id: '1234erd',
         customer_phone: "9999999999",
         customer_name: "dual",
-        customer_email: "x@gmail.com"
+        customer_email: "Dual@gmail.com"
       }
     };
 
