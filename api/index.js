@@ -22,7 +22,7 @@ function getOrderId() {
 }
 
 // Endpoint to initiate payment
-app.post("/payment", async (req, res) => {
+app.get("/payment", async (req, res) => {
   const {email,id,name}=req.body
   try {
     const orderId = getOrderId();

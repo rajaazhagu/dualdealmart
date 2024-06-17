@@ -22,20 +22,14 @@ const Payment = ({user}) => {
   }, []); // Empty dependency array ensures this effect runs only once
 
   const getSessionId = async () => {
-    let email=user.email
-    let id = user.order_id
-    let name = user.name
     try {
-      await axios.post("https://dualdealmart.onrender.com/payment",{email,id,name})
-      .then((res)=>{
-        if (res.data && res.data.payment_session_id) {
-          console.log(res.data.transaction_id);
-          setOrderId(res.data.order_id); // Update orderId state
-          return res.data.payment_session_id;
-        }
-      })
+      const res = await axios.get("https://dualdealmart.onrender.com/payment");
       
-      
+      if (res.data && res.data.payment_session_id) {
+        console.log(res.data.transaction_id);
+        setOrderId(res.data.order_id); // Update orderId state
+        return res.data.payment_session_id;
+      }
     } catch (error) {
       console.error('Error fetching sessionId:', error);
     }
