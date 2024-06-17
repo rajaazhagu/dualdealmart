@@ -179,4 +179,4 @@ const TotalReview =(async(req,res)=>{
 })
 
 
-module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,countUpdate,reviewUpdate,TotalReview}
+module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}

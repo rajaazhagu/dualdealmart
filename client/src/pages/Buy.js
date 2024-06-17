@@ -8,7 +8,7 @@ const Buy = ({ buy, user }) => {
   const navigate =useNavigate()
   const sendEmail = (e) => {
     e.preventDefault();
-
+    
     emailjs
       .sendForm('service_y7xj0zf', 'template_idu1t8y', form.current, 'kAmXiNVYiUnGKFlVQ')
       .then(
@@ -20,6 +20,7 @@ const Buy = ({ buy, user }) => {
           console.log('FAILED...', error.text);
         }
       );
+      console.log(form.current)
   };
 
   return (

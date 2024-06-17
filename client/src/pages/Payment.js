@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { load } from '@cashfreepayments/cashfree-js';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 
 const Payment = ({user,setUser}) => {
   const [orderId, setOrderId] = useState('');
+  const navigate = useNavigate()
   let cashfree;
   const handleFetch = async () => {
     try {
@@ -31,7 +35,7 @@ const Payment = ({user,setUser}) => {
 
   const getSessionId = async () => {
     try {
-      const res = await axios.get("https://dualdealmart.onrender.com/payment");
+      const res = await axios.post("https://dualdealmart.onrender.com/payment",{email:user.email,name:user.name});
       
       if (res.data && res.data.payment_session_id) {
         setOrderId(res.data.order_id); // Update orderId state
@@ -61,6 +65,9 @@ const Payment = ({user,setUser}) => {
           let email=user.email
           await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,year})
           handleFetch()
+          navigate('/')
+          toast.success('payment successful');
+
         });
       }
     } catch (error) {

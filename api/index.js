@@ -21,8 +21,10 @@ function getOrderId() {
   return unique.substr(0, 12); // 12 characters long
 }
 
+
 // Endpoint to initiate payment
-app.get("/payment", async (req, res) => {
+app.post("/payment", async (req, res) => {
+  const {email,name} = req.body
   try {
     const orderId = getOrderId();
     
@@ -33,9 +35,9 @@ app.get("/payment", async (req, res) => {
       order_id: orderId,
       customer_details: {
         customer_id: '1234erd',
-        customer_phone: "9999999999",
-        customer_name: "dual",
-        customer_email: "Dual@gmail.com"
+        customer_phone: "",
+        customer_name: name,
+        customer_email: email
       }
     };
 
