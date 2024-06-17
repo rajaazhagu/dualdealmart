@@ -34,9 +34,9 @@ app.get("/payment", async (req, res) => {
       order_id: orderId,
       customer_details: {
         customer_id: '1234erd',
-        customer_phone: "your phone number",
+        customer_phone: "9999999999",
         customer_name: "dual",
-        customer_email: "your email"
+        customer_email: "x@gmail.com"
       }
     };
 
