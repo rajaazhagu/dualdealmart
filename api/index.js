@@ -15,7 +15,7 @@ dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 Cashfree.XClientId=process.env.CLIENT_ID
 Cashfree.XClientSecret=process.env.CLIENT_SECRET
-Cashfree.XEnvironment=Cashfree.Environment.SANDBOX
+Cashfree.XEnvironment=Cashfree.Environment.PRODUCTION
 function getOrderId() {
   const unique = crypto.randomBytes(8).toString('hex');
   return unique.substr(0, 12); // 12 characters long
