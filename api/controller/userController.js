@@ -137,11 +137,11 @@ const deleteList=(async(req,res)=>{
 })
 
 const payMonth =(async(req,res)=>{
-  const {orderId,email,date,month,count,year} =req.body
+  const {email,date,month,count,year} =req.body
   try {
     const data = await User.findOne({email:email})
     if(data){
-      await User.updateOne({email:email},{$set:{TransactionId:orderId,date:date,month:month,count:count,year:year}})
+      await User.updateOne({email:email},{$set:{date:date,month:month,count:count,year:year}})
       res.json('paid')
     }
   } catch (error) {

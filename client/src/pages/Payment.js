@@ -26,7 +26,6 @@ const Payment = ({user}) => {
       const res = await axios.get("https://dualdealmart.onrender.com/payment");
       
       if (res.data && res.data.payment_session_id) {
-        console.log(res.data.transaction_id);
         setOrderId(res.data.order_id); // Update orderId state
         return res.data.payment_session_id;
       }
@@ -53,7 +52,7 @@ const Payment = ({user}) => {
           let month = dateMonth.getMonth()+1
           let year = dateMonth.getFullYear()
           let email=user.email
-          await axios.post("https://dualdealmart.onrender.com/pay/month",{orderId,email,date,month,count,year})
+          await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,count,year})
         });
       }
     } catch (error) {

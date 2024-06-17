@@ -19,10 +19,6 @@ const userSchema = new mongoose.Schema({
     photo:{
         type:String
     },
-    TransactionId:{
-        type:String,
-        required:false
-    },
     date:{
         type:Number,
         required:false

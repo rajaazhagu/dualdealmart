@@ -206,7 +206,7 @@ const Profile = ({ user, setUser}) => {
         <button className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80'>
           Update
         </button>
-        {user.count<=30 && user.TransactionId
+        {user.count<=30
         ?
         <Link to='/create-Listing' className='text-white bg-red-700 rounded-lg p-3 text-center uppercase hover:opacity-85'>create Listing</Link>
         :
@@ -217,7 +217,7 @@ const Profile = ({ user, setUser}) => {
         <span className='text-red-700 cursor-pointer' onClick={((e)=>{handleDelete(e)})}>Delete account</span>
         <span className='text-red-700 cursor-pointer' onClick={(()=>{handleSignout()})}>Sign out</span>
       </div>
-      {user.count>30 || !user.TransactionId ?<p className='font-bold text-center my-4'>Please Pay and Continue your Listings</p>
+      {user.count>30 ? <p className='font-bold text-center my-4'>Please Pay and Continue your Listings</p>
        : <button onClick={(()=>{handleShow()})} className='text-green-700 w-full'>Show Listings</button>
        }
        {list.length >0 && list.map((single)=>(
