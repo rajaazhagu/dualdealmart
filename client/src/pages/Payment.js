@@ -58,6 +58,7 @@ const Payment = ({user,setUser}) => {
         };
 
         cashfree.checkout(checkOutOptions).then(async(response) => {
+          console.log(response)
           let dateMonth = new Date()
           let date = dateMonth.getDate()
           let month = dateMonth.getMonth()+1
