@@ -26,7 +26,7 @@ const Payment = () => {
       const res = await axios.get("https://dualdealmart.onrender.com/payment");
       
       if (res.data && res.data.payment_session_id) {
-        console.log(res.data);
+        console.log(res.data.transaction_id);
         setOrderId(res.data.order_id); // Update orderId state
         return res.data.payment_session_id;
       }
