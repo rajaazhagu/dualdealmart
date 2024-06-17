@@ -22,7 +22,8 @@ function getOrderId() {
 }
 
 // Endpoint to initiate payment
-app.get("/payment", async (req, res) => {
+app.post("/payment", async (req, res) => {
+  const {email,id,name}=req.body
   try {
     const orderId = getOrderId();
     
@@ -32,10 +33,10 @@ app.get("/payment", async (req, res) => {
       order_currency: "INR",
       order_id: orderId,
       customer_details: {
-        customer_id: "kjnv123",
+        customer_id: id,
         customer_phone: "9999999999",
-        customer_name: "njn",
-        customer_email: "azhagu@gmail.com"
+        customer_name: name,
+        customer_email: email
       }
     };
 
