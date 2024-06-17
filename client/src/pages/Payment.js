@@ -2,9 +2,17 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { load } from '@cashfreepayments/cashfree-js';
 
-const Payment = ({user}) => {
+const Payment = ({user,setUser}) => {
   const [orderId, setOrderId] = useState('');
   let cashfree;
+  const handleFetch = async () => {
+    try {
+      const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: user.email });
+      setUser(response.data);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
 
   useEffect(() => {
     const initializeCashfree = async () => {
@@ -52,6 +60,7 @@ const Payment = ({user}) => {
           let year = dateMonth.getFullYear()
           let email=user.email
           await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,year})
+          handleFetch()
         });
       }
     } catch (error) {
