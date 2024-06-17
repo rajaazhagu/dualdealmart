@@ -64,7 +64,7 @@ const Home = ({list,user}) => {
         </div>
       </div>
          {
-          list.length >0 &&
+          list.length >0 ?
           <div className='flex flex-col gap-4 sm:flex-row flex-wrap'>
             {list.slice(0).reverse().map((single)=>(
               <Link to ={`/listing/${single._id}`}>
@@ -89,7 +89,7 @@ const Home = ({list,user}) => {
               </Link>
             ))}
           </div>
-         }
+          :<div className='flex justify-center font-bold items-center relative top-20'><h1 className='text-3xl text-center'>Loading.....</h1></div>}
     </div>
   )
 }

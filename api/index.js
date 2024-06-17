@@ -6,7 +6,9 @@ const mongoose = require("mongoose");
 const route = require("./routes/routes");
 const { Cashfree } = require('cashfree-pg');
 const crypto = require('crypto');
+const helmet = require('helmet');
 
+app.use(helmet());
 app.use(cors());
 app.use(express.json());
 dotenv.config();
