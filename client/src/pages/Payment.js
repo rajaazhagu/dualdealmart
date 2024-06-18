@@ -4,11 +4,10 @@ import { load } from '@cashfreepayments/cashfree-js';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-
-const Payment = ({user,setUser}) => {
+const Payment = ({ user, setUser }) => {
   const [orderId, setOrderId] = useState('');
-  const navigate = useNavigate()
-  let cashfree;
+  const navigate = useNavigate();
+
   const handleFetch = async () => {
     try {
       const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: user.email });
@@ -18,25 +17,9 @@ const Payment = ({user,setUser}) => {
     }
   };
 
-  useEffect(() => {
-    const initializeCashfree = async () => {
-      try {
-        cashfree = await load({
-          mode: 'production'
-        });
-        console.log('Cashfree initialized');
-      } catch (error) {
-        console.error('Error initializing Cashfree:', error);
-      }
-    };
-
-    initializeCashfree();
-  }, []); // Empty dependency array ensures this effect runs only once
-
   const getSessionId = async () => {
     try {
       const res = await axios.get("https://dualdealmart.onrender.com/payment");
-      
       if (res.data && res.data.payment_session_id) {
         setOrderId(res.data.order_id); // Update orderId state
         return res.data.payment_session_id;
@@ -48,7 +31,11 @@ const Payment = ({user,setUser}) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+
     try {
+      // Load cashfree each time handleClick is called
+      const cashfree = await load({ mode: 'production' });
+
       const sessionId = await getSessionId();
 
       if (sessionId) {
@@ -57,17 +44,17 @@ const Payment = ({user,setUser}) => {
           redirectTarget: '_modal'
         };
 
-        cashfree.checkout(checkOutOptions).then(async(response) => {
-          if(response.paymentDetails.paymentMessage==='Payment finished. Check status.'){
-          let dateMonth = new Date()
-          let date = dateMonth.getDate()
-          let month = dateMonth.getMonth()+1
-          let year = dateMonth.getFullYear()
-          let email=user.email
-          await axios.post("https://dualdealmart.onrender.com/pay/month",{email,date,month,year})
-          handleFetch()
-          navigate('/')
-          toast.success('payment successful');
+        cashfree.checkout(checkOutOptions).then(async (response) => {
+          if (response.paymentDetails.paymentMessage === 'Payment finished. Check status.') {
+            const dateMonth = new Date();
+            const date = dateMonth.getDate();
+            const month = dateMonth.getMonth() + 1;
+            const year = dateMonth.getFullYear();
+            const email = user.email;
+            await axios.post("https://dualdealmart.onrender.com/pay/month", { email, date, month, year });
+            handleFetch();
+            navigate('/');
+            toast.success('Payment successful');
           }
         });
       }
@@ -79,7 +66,7 @@ const Payment = ({user,setUser}) => {
   return (
     <div className='flex flex-col justify-center items-center my-20 gap-3 w-150'>
       <button onClick={handleClick} className='bg-red-700 font-bold w-40 text-center hover:opacity-85 text-white'>Pay</button>
-      <p className='text-black font-2xl ml-3 font-semibold'>pay only 50 rupees/month for Listing</p>
+      <p className='text-black font-2xl ml-3 font-semibold'>Pay only 50 rupees/month for Listing</p>
     </div>
   );
 };

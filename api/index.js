@@ -22,7 +22,6 @@ function getOrderId() {
 }
 
 
-
 // Endpoint to initiate payment
 app.get("/payment", async (req, res) => {
   try {
