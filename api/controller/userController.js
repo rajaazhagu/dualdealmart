@@ -1,5 +1,7 @@
 const User = require("../models/Usermodel")
 const bcryptjs = require("bcryptjs")
+const jwt = require('jsonwebtoken');
+const SECRET_KEY = 'asdf45tryudgfbdgert'; 
 const List = require("../models/Listmodel")
 const user =(async(req,res)=>{
   try {
@@ -21,34 +23,36 @@ const user =(async(req,res)=>{
   }
 })
 
-const userSignin =(async(req,res)=>{
-    try{
-    const {email,password} = req.body
-    const username = await User.findOne({email:email})
-    if(username){
-   const validPassword = bcryptjs.compareSync(password,username.password)
-   
-    if(username.email==email && validPassword){
-        res.json("success")
+
+const userSignin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'No account found' });
     }
-    else if(!validPassword){
-        res.json("wrong password")
+
+    const validPassword = bcryptjs.compareSync(password, user.password);
+    if (!validPassword) {
+      return res.status(401).json({ message: 'Wrong password' });
     }
-   }
-    else{
-        res.json("no")
-    }
-    }
-    catch(error){
-       console.log(error)
-    }
-})
+
+    const token = jwt.sign({ id: user._id, email: user.email,photo:user.photo,name:user.name}, SECRET_KEY, { expiresIn: '7d' });
+
+    res.status(200).json({ message: 'success', token, user: { email: user.email, id: user._id,photo:user.photo,name:user.name } });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
 
 const userGoogle =(async(req,res)=>{
-  const {name,email} = req.body
+  const {email} = req.body
   const user = await User.findOne({email:email})
   if(user){
-    res.json("ok")
+    const token = jwt.sign({ id: user._id, email: user.email,photo:user.photo,name:user.name}, SECRET_KEY, { expiresIn: '7d' });
+    res.status(200).json({ message: 'success', token, user: { email: user.email, id: user._id,photo:user.photo,name:user.name} });
   }
   else{
     res.json("no")
@@ -69,11 +73,6 @@ const userAuth = (async(req,res)=>{
 
 })
 
-const userGet =(async(req,res)=>{
-    const {email} =req.body
-    const data = await User.findOne({email:email})
-    res.json(data)
-})
 
 const userUpdate=(async(req,res)=>{
   const { name, email, password, photo,oldmail } = req.body;
@@ -179,4 +178,4 @@ const TotalReview =(async(req,res)=>{
 })
 
 
-module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}
+module.exports ={user,userSignin,userGoogle,userAuth,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}

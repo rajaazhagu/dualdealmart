@@ -9,17 +9,7 @@ import { toast } from "react-toastify";
 
 
 
-const Google = ({user,setUser}) => {
-    const Fetchdata=(async(result)=>{
-        try {
-            await axios.post("https://dualdealmart.onrender.com/detail/get",{email:result.user.email})
-            .then((res)=>{
-              setUser(res.data)
-            })
-          } catch (error) {
-            console.log(error)
-          }
-     })
+const Google = () => {
     const navigate = useNavigate()
     const handleGoogle=(async(e)=>{
       try {
@@ -31,8 +21,7 @@ const Google = ({user,setUser}) => {
           .then((res)=>{
                if(res.data==="ok"){
                   toast.success("user created successful")
-                  navigate('/')
-                  Fetchdata(result)
+                  navigate('/sign-in')
                }
                else{
                   toast.error("user already exist")

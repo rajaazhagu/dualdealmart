@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
-const Profile = ({ user, setUser}) => {
+
+const Profile = ({user,setUser}) => {
   const fileRef = useRef(null);
+ 
   const Navigate =useNavigate()
   const [file, setFile] = useState(null);
   const [list,setList] = useState([])
@@ -78,6 +80,7 @@ const Profile = ({ user, setUser}) => {
       if (response.data === 'updated') {
         toast.success('Profile updated successfully');
         handleFetch();
+        handleSignout();
       } else {
         toast.error('Profile not updated');
       }
@@ -105,11 +108,15 @@ const Profile = ({ user, setUser}) => {
           alert(error)
      }
   })
-  
+
    const handleSignout=(()=>{
       Navigate('/sign-in')
-      setUser('')
+
+      // Clear user data from localStorage
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
       toast.success("signed out successfully")
+      setUser('')
    })
 
   const handleShow =(async()=>{

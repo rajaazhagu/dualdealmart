@@ -6,17 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from "react-toastify";
 
 
-const OAuth = ({user,setUser}) => {
-     const Fetchdata=(async(result)=>{
-        try {
-            await axios.post("https://dualdealmart.onrender.com/detail/get",{email:result.user.email})
-            .then((res)=>{
-               setUser(res.data)
-            })
-          } catch (error) {
-            console.log(error)
-          }
-     })
+
+const OAuth = ({fetch,setFetch}) => {
     const navigate = useNavigate()
   const handleGoogle=(async(e)=>{
     try {
@@ -24,19 +15,19 @@ const OAuth = ({user,setUser}) => {
         const provider = new GoogleAuthProvider();
         const auth =  getAuth(app)
         const result = await signInWithPopup(auth,provider)
-        await axios.post("https://dualdealmart.onrender.com/auth/google",{name:result.user.displayName,email:result.user.email,photo:result.user.photoURL})
-        .then((res)=>{
-             if(res.data==="ok"){
-                toast.success("login successful")
-                navigate('/')
-                Fetchdata(result)
-             }
-             else{
-                toast.error("user not exist")
-             }
-        })
+        const response = await axios.post("https://dualdealmart.onrender.com/auth/google",{email:result.user.email})
+              const { user, token } = response.data; 
+              localStorage.setItem('token', token);
+              localStorage.setItem('user', JSON.stringify(user));
+              toast.success('Login successful');
+              navigate('/')
+              setFetch(!fetch)
+              if(response.data==='no'){
+                toast.error('Failed to login. Please check your credentials.');
+              }
     } catch (error) {
-        
+      console.error('Login error:', error);
+      toast.error('Failed to login. Please check your credentials.');
     }
   })
 

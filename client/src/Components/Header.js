@@ -2,6 +2,7 @@ import React from 'react'
 import {FaSearch} from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import logo from '../logo/logo.png'
+
 const Header = ({user,search,setSearch}) => {
   return (
     <div className='bg-slate-300 shadow-md'>

@@ -55,7 +55,6 @@ app.use("/api", route);
 app.use("/user", route);
 app.use("/auth", route);
 app.use("/google", route);
-app.use("/detail", route);
 app.use('/update',route)
 app.use('/delete',route)
 app.use('/Create',route)
