@@ -73,6 +73,11 @@ const userAuth = (async(req,res)=>{
 
 })
 
+const userGet =(async(req,res)=>{
+    const {email} =req.body
+    const data = await User.findOne({email:email})
+    res.json(data)
+})
 
 const userUpdate=(async(req,res)=>{
   const { name, email, password, photo,oldmail } = req.body;
@@ -178,4 +183,4 @@ const TotalReview =(async(req,res)=>{
 })
 
 
-module.exports ={user,userSignin,userGoogle,userAuth,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}
+module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}

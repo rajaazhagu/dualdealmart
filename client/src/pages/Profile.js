@@ -27,7 +27,10 @@ const Profile = ({user,setUser}) => {
     if (file) {
       handleFile(file);
     }
-  }, [file]);
+    if(user){
+      handleFetch();
+    }
+  }, [file,user]);
   const handleFetch = async () => {
     try {
       const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: formData.email });

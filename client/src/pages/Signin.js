@@ -25,7 +25,7 @@ const Signin = ({setFetch,fetch}) => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('http://localhost:3002/user/signin', formData);
+      const response = await axios.post('https://dualdealmart.onrender.com/user/signin', formData);
       const { user, token } = response.data; 
 
      
