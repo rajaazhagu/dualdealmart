@@ -5,32 +5,29 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
-
+import { useDispatch } from 'react-redux';
+import { clearUser } from '../slices/authSlice';
 
 const Profile = ({user,setUser}) => {
   const fileRef = useRef(null);
- 
+  console.log(user)
   const Navigate =useNavigate()
   const [file, setFile] = useState(null);
   const [list,setList] = useState([])
   const [pay,setpay]=useState(false)
   const [filePer, setFilePer] = useState(0);
-  const [formData, setFormData] = useState({
-    name: user.name,
-    email: user.email,
-    photo: user.photo
-  });
+ 
  
   const [fileError, setFileError] = useState(false);
+  
+
+  
   useEffect(() => {
     if (file) {
       handleFile(file);
     }
-    if(user){
-      handleFetch();
-    }
-  }, [file,user]);
+    handleFetch()
+  }, [file]);
   const handleFetch = async () => {
     try {
       const response = await axios.post("https://dualdealmart.onrender.com/detail/get", { email: formData.email });
@@ -39,6 +36,12 @@ const Profile = ({user,setUser}) => {
       console.error('Error fetching user details:', error);
     }
   };
+
+  const [formData, setFormData] = useState({
+    name: user.name,
+    email: user.email,
+    photo: user.photo
+  });
 
   const handleFile = (file) => {
     const storage = getStorage(app);
@@ -83,7 +86,7 @@ const Profile = ({user,setUser}) => {
       if (response.data === 'updated') {
         toast.success('Profile updated successfully');
         handleFetch();
-        handleSignout();
+        handleSignout()
       } else {
         toast.error('Profile not updated');
       }
@@ -111,9 +114,11 @@ const Profile = ({user,setUser}) => {
           alert(error)
      }
   })
+  const dispatch = useDispatch();
 
    const handleSignout=(()=>{
       Navigate('/sign-in')
+      dispatch(clearUser());
 
       // Clear user data from localStorage
       localStorage.removeItem('token');
@@ -191,9 +196,9 @@ const Profile = ({user,setUser}) => {
         <input
           type='text'
           placeholder='Username'
-          defaultValue={user.name}
           className='border p-3 rounded-lg'
           id='name'
+          defaultValue={user.name}
           onChange={handleInput}
         />
         <input

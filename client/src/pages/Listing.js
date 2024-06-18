@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import Description from './Description';
 
 
-const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setbuy }) => {
+const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setBuy }) => {
   const [list, setList] = useState([]);
   const [contact, setContact] = useState(false);
   const [rating, setRating] = useState([]);
@@ -21,7 +21,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setbuy }) =>
   const param = useParams();
   const refer = useRef();
 
-
+  console.log(user.email)
   useEffect(() => {
     axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res) => {
@@ -29,7 +29,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setbuy }) =>
           const data = res.data.data.filter((single) => single._id === param.listingId);
           console.log(data);
           setList(data);
-          setbuy(data);
+          setBuy(data);
           const dataLength = data[0].userEmail.length;
           for (let i = 0; i < dataLength; i++) {
             if (data[0].userEmail[i] === user.email) {
@@ -108,7 +108,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setbuy }) =>
           <div className='flex text-center font-semibold justify-center'>
             {user && review && <h1 className='text-2xl my-2'>Your Review</h1>}
           </div>
-          {user && review ? (
+          { review ? (
             <div className='flex gap-5 justify-center'>
               {[...Array(5)].map((_, index) =>
                 <label key={index}>
