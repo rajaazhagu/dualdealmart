@@ -1,13 +1,16 @@
 // Signin.js
 
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { setuser } from '../slices/authSlice'; // Adjust the path as per your project structure
 import OAuth from '../Components/OAuth'
+
 const Signin = ({setFetch,fetch}) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -22,12 +25,13 @@ const Signin = ({setFetch,fetch}) => {
     e.preventDefault();
     
     try {
-      const response = await axios.post('https://dualdealmart.onrender.com/user/signin', formData);
+      const response = await axios.post('http://localhost:3002/user/signin', formData);
       const { user, token } = response.data; 
 
      
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
+      dispatch(setuser(user));
       toast.success('Login successful');
       navigate('/')
       setFetch(!fetch)

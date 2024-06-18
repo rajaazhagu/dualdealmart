@@ -15,6 +15,9 @@ import Contactus from './pages/Contactus';
 import PrivacyPolicy from './pages/privacy';
 import TermsConditions from './pages/Terms';
 import Refund from './pages/Refund';
+import { Provider } from 'react-redux';
+import store from './store';
+import { setuser } from './slices/authSlice';
 
 
 const App = () => {
@@ -39,11 +42,12 @@ const App = () => {
     if (storedUser) {
       const user = JSON.parse(storedUser);
       setUser(user)
+      store.dispatch(setuser(user));
     }
   }, [fetch]);
 
   return (
-  
+    <Provider store={store}>
       <div>
         <Header user={user} setSearch={setSearch} search={search} />
         <Routes>
@@ -62,6 +66,7 @@ const App = () => {
           <Route path='/refund' element={<Refund />} />
         </Routes>
       </div>
+    </Provider>
   );
 }
 
