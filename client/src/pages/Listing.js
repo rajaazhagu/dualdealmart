@@ -108,7 +108,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setBuy }) =>
           <div className='flex text-center font-semibold justify-center'>
             {user && review && <h1 className='text-2xl my-2'>Your Review</h1>}
           </div>
-          { review ? (
+          {user && review ? (
             <div className='flex gap-5 justify-center'>
               {[...Array(5)].map((_, index) =>
                 <label key={index}>
