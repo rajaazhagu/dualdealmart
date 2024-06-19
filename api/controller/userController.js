@@ -38,7 +38,7 @@ const userSignin = async (req, res) => {
       return res.status(401).json({ message: 'Wrong password' });
     }
 
-    const token = jwt.sign({ id: user._id, email: user.email,photo:user.photo,name:user.name}, SECRET_KEY, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user._id, email: user.email,photo:user.photo,name:user.name}, SECRET_KEY, { expiresIn: '3d' });
 
     res.status(200).json({ message: 'success', token, user: { email: user.email, id: user._id,photo:user.photo,name:user.name } });
   } catch (error) {
