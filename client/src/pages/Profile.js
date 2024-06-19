@@ -124,7 +124,7 @@ const Profile = ({user,setUser}) => {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       toast.success("signed out successfully")
-      setUser('')
+      setUser("")
    })
 
   const handleShow =(async()=>{
