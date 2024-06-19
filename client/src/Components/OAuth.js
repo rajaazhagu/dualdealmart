@@ -30,8 +30,7 @@ const OAuth = ({user,setUser,fetch,setFetch}) => {
                 toast.error("No user found")
               }
     } catch (error) {
-      console.error('Login error:', error);
-      toast.error('Failed to login. Please check your credentials.');
+          toast.error('Failed to login. Please check your credentials. No User found');
     }
   })
 

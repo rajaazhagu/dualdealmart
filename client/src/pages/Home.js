@@ -58,7 +58,7 @@ const Home = ({list,user}) => {
       <div className='flex flex-col my-10 gap-6 px-3 max-w-6xl mx-auto'>
         <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>Find Your Next<span className='text-slate-500'> Perfect</span></h1>
         <div className='text-gray-400 text-xs sm:text-sm '>
-          RajaEstate is the place to find your next perfect
+          DualDealMart is the place to find your next perfect
           <br/>
           we have wide varieties of categories to choose from us.<span className='text-black font-bold'>Rent it,Own it,Love it...</span>
         </div>
