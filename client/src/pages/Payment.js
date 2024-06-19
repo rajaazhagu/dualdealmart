@@ -66,7 +66,7 @@ const Payment = ({ user, setUser }) => {
   return (
     <div className='flex flex-col justify-center items-center my-20 gap-3 w-150'>
       <button onClick={handleClick} className='bg-red-700 font-bold w-40 text-center hover:opacity-85 text-white'>Pay</button>
-      <p className='text-black font-2xl ml-3 font-semibold'>Pay only 50 rupees/month for Listing</p>
+      <p className='text-black font-2xl ml-3 font-semibold'>Pay only 100 rupees for your Listings</p>
     </div>
   );
 };
