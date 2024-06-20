@@ -114,7 +114,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
                            <input type='tel' id='price' placeholder='price' className='border p-3 rounded-lg'  onChange={((e)=>handleChange(e))}/>
                            <div className='flex flex-col'>
                             <p>Price</p>
-                            <span>(/month)</span>
+                            {formData.type==='rent' && <span>(/month)</span>}
                            </div>
                     </div>
                     <div className='flex gap-2'>
