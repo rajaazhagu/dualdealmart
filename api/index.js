@@ -29,7 +29,7 @@ app.get("/payment", async (req, res) => {
     
     // Payment request payload
     const request = {
-      order_amount: "1.00",
+      order_amount: "100.00",
       order_currency: "INR",
       order_id: orderId,
       customer_details: {
