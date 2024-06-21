@@ -48,7 +48,7 @@ const Buy = ({ buy, user }) => {
           />
           <textarea
             type='text'
-            placeholder='Message or quanity in words. example:I need 2'
+            placeholder='Product Name and quanity in words. example:casual shirt - I need 2'
             name='message'
             className='border rounded-md my-3 h-20'
           />
