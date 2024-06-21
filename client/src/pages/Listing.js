@@ -10,9 +10,9 @@ import Contact from '../Components/Contact';
 import { FaStar } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import Description from './Description';
+import { Helmet } from 'react-helmet';
 
-
-const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setBuy }) => {
+const Listing = ({ user, userRating, setUserRating, setFetch, fetch, setBuy }) => {
   const [list, setList] = useState([]);
   const [contact, setContact] = useState(false);
   const [rating, setRating] = useState([]);
@@ -71,6 +71,12 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setBuy }) =>
     <div>
       {list.length > 0 ? (
         <div>
+          <Helmet>
+            <title>{list[0].name} - DualDealMart</title>
+            <meta name="description" content={`Discover more about ${list[0].name}. ${list[0].description}. Located at ${list[0].address}. Available for ${list[0].price}.`} />
+            <meta name="keywords" content={`buy, rent, ${list[0].name}, ${list[0].address}, ${list[0].price}`} />
+            <link rel="canonical" href={`https://www.dualdealmart.org/listing/${param.listingId}`} />
+          </Helmet>
           <Swiper
             modules={[Navigation]}
             navigation
@@ -93,11 +99,11 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch,setBuy }) =>
             <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-lg'>{list[0].type === 'rent' ? 'For Rent' : 'For Sale'}</p>
             {list[0].offer && <p className='bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-lg'>Rs.{list[0].price - list[0].discountprice} discount</p>}
           </div>
-           <Description list={list}/>
-          {list[0].type==='sell'&& user &&
-              <div className='flex justify-center'>
-                <Link to="/buy"><button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button></Link>
-              </div>
+          <Description list={list} />
+          {list[0].type === 'sell' && user &&
+            <div className='flex justify-center'>
+              <Link to="/buy"><button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button></Link>
+            </div>
           }
           <div className='flex justify-center gap-4 w-100'>
             {user && !contact ? <button onClick={() => setContact(true)} className='bg-slate-700 w-60 h-8 rounded-lg text-white my-2'>Mail</button> : !user ? <Link to='/sign-in' className='bg-slate-700 w-60 h-8 rounded-lg text-white text-center my-5'>Sign-in</Link> : ''}
