@@ -71,7 +71,7 @@ const Home = ({list,user}) => {
               <div className='shadow-lg border h-50 border-slate-200 bg-white rounded-lg mx-7 flex flex-col gap-1'>
                 <img className='w-65 h-60 sm:w-40 h-40 self-center  rounded-lg' src={single.imageURLs[0]}/>
                 <h1 className='text-slate-600 text-center '><span className='text-black text-1xl font-bold'>Category : </span>{single.name.slice(0,7)}{single.name.length >9 && '...'}</h1>
-                <h1 className='text-slate-600 text-center '><span className='text-black text-1xl relative font-bold'>Price : </span>{single.price}</h1>
+                <h1 className='text-slate-600 text-center '><span className='text-black text-1xl relative font-bold'>Price : </span>Rs.{single.price}</h1>
                 <div className='flex flex-row gap-2  justify-center relative bottom-2'>
                   <p className='bg-red-900 my-2 text-white text-center  w-20 h-5 rounded-lg'>{single.type==='rent'?'For Rent':'For Sale'}</p>
                   {single.offer && <p className='bg-green-900 w-20 text-white h-5 text-center rounded-lg my-2'>offer</p>}
