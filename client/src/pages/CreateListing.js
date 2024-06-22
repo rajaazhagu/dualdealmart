@@ -7,6 +7,7 @@ import axios from 'axios';
 
 const CreateListing = ({user,setFetch,fetch}) => {
     const [files,setFiles]=useState([])
+    const [filePer, setFilePer] = useState(0);
     const [formData,setFormData] = useState({ email:user.email,type:'rent',offer:false,imageURLs:[]})
     const handleImageSubmit=(()=>{
          if(files.length >0 && files.length + formData.imageURLs.length < 7){
@@ -31,9 +32,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
 
             uploadTask.on('state_changed',((snapshot)=>{
                 const progress= (snapshot.bytesTransferred/snapshot.totalBytes)*100
-                if(progress===100){
-                    toast.success('uploaded')
-                }
+                setFilePer(Math.round(progress));
             }),
             (error)=>{
                 reject(error)
@@ -114,7 +113,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
                            <input type='tel' id='price' placeholder='price' className='border p-3 rounded-lg'  onChange={((e)=>handleChange(e))}/>
                            <div className='flex flex-col'>
                             <p>Price</p>
-                            {formData.type==='rent' && <span>(/month)</span>}
+                            {formData.type==='rent' && <span>(/month)or(/day)or/(/KM)</span>}
                            </div>
                     </div>
                     <div className='flex gap-2'>
@@ -132,11 +131,11 @@ const CreateListing = ({user,setFetch,fetch}) => {
                      <button type ='button' onClick={(()=>handleImageSubmit())} className='border h-10 my-4 border-green-500 text-green-400 rounded'>upload</button>
                 </div>
                 {
-                    formData.imageURLs.length >0 ?formData.imageURLs.map((urls,index)=>(
+                    formData.imageURLs.length >0 && filePer===100 ?formData.imageURLs.map((urls,index)=>(
                     <div className='flex justify-between border p-3 items-center'>
                         <img alt ='uploaded images' src ={urls} className='w-20 h-20 rounded-lg object-content'/>
                         <button type='button' onClick={(()=>handleRemove(index))} className='p-3 text-red-600 rounded-lg uppercase hover:opacity-95'>Delete</button>
-                    </div>)):''
+                    </div>)):<p className='text-center'>uploading {filePer}% wait until image dispaly below</p>
                 }
                 <button className='p-3 bg-slate-600 text-white rounded-lg uppercase'>Create Listing</button>
             </div>
