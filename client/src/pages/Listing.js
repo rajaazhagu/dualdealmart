@@ -93,7 +93,14 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch, setBuy }) =
           <h1 className='text-slate-600 text-2xl text-center my-2'><span className='text-2xl text-center text-black font-bold'>Price: </span>Rs.{list[0].price}{list[0].type === 'rent' && '/month'}</h1>
           <p className='flex items-center justify-center mt-6  text-slate-600 my-2 text-1xl'>
             <FaMapMarkedAlt className='text-green-600 text-center w-20 h-30' />
-            {list[0].address}
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(list[0].address)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500"
+            >
+              {list[0].address}
+            </a>
           </p>
           <div className='flex flex-row gap-2 justify-center'>
             <p className='bg-red-900 w-full max-w-[200px] text-white text-center p-1 rounded-lg'>{list[0].type === 'rent' ? 'For Rent' : 'For Sale'}</p>
