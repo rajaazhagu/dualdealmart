@@ -78,7 +78,7 @@ const Home = ({list,user}) => {
                 </div>
                <div className='flex flex-col'>
                   <h1 className='text-center font-bold'>Review</h1>
-                  <span className='text-2xl font-bold text-center'>{single.totalReview >0 ?(single.totalReview).toFixed(1):0}</span>
+                  <span className='text-2xl font-bold text-center'>{single.totalReview >0 && single.totalReview <=5 ?(single.totalReview).toFixed(1):single.totalReview>5 ? 5 :0}</span>
                   <div className='flex gap-4 justify-center'>
                     {[...Array(5)].map((_,index)=>
                         <FaStar size={20} color={index+1 <=(single.totalReview) ? 'gold':'grey'} />
