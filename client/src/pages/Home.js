@@ -69,7 +69,7 @@ const Home = ({list,user}) => {
             {list.slice(0).reverse().map((single)=>(
               <Link to ={`/listing/${single._id}`}>
               <div className='shadow-lg border h-50 border-slate-200 bg-white rounded-lg mx-7 flex flex-col gap-1'>
-                <img className='w-80 h-80 sm:w-40 h-40 self-center rounded-t-lg' src={single.imageURLs[0]}/>
+                <img className='w-80 h-80 sm:w-40 h-40 self-center rounded-lg shadow-lg z-5' src={single.imageURLs[0]}/>
                 <h1 className='text-slate-600 text-center '><span className='text-black text-1xl font-bold'>Category : </span>{single.name.slice(0,7)}{single.name.length >9 && '...'}</h1>
                 <h1 className='text-slate-600 text-center '><span className='text-black text-1xl relative font-bold'>Price : </span>Rs.{single.price}</h1>
                 <div className='flex flex-row gap-2  justify-center relative bottom-2'>
