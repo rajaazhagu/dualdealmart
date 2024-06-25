@@ -66,7 +66,6 @@ app.use('/review',route)
 app.use('/total',route)
 
 app.get("/ping", (req, res) => {
-  console.log('Ping received at:', new Date().toISOString());
   res.send("Ping received");
 });
 
