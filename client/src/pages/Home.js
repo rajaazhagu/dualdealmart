@@ -58,10 +58,11 @@ const Home = ({list,user}) => {
       <div className='flex flex-col my-10 gap-6 px-3 max-w-6xl mx-auto'>
         <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>Find Your Next<span className='text-slate-500'> Perfect</span></h1>
         <div className='text-gray-400 text-xs sm:text-sm'>
-          <h2 className='font-semibold text-slate-700 '>DualDealMart is the place for rent and sell any products.</h2>
+          <h2 className='font-semibold text-xl'><span className='text-black'>DualDealMart</span> is the place for rent and sell any products.</h2>
           <br/>
-          <h2 className='font-semibold text-slate-700'>Pay one time for unlimited listings</h2><span className='text-black font-bold my-2'>Rent it,Own it,Love it...</span>
+          <h2 className='font-semibold text-xl'>Pay <span className='text-black'>one </span> time for unlimited listings</h2><span className='text-black font-bold my-2 text-xl'>Rent it,Own it,Love it...</span>
         </div>
+        <h1 className='flex justify-center font-bold text-slate-700 drop-shadow-lg text-2xl my-4'>Sale and Rent products !!</h1>
       </div>
          {
           list.length >0 ?
