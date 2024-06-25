@@ -65,6 +65,11 @@ app.use('/pay',route)
 app.use('/review',route)
 app.use('/total',route)
 
+app.get("/ping", (req, res) => {
+  console.log('Ping received at:', new Date().toISOString());
+  res.send("Ping received");
+});
+
 mongoose.connect(
   "mongodb+srv://azhaguazhagu30:j2oW5hkGVUwR2tG7@cluster0.ipwnl5f.mongodb.net/dualdealmart?retryWrites=true&w=majority&appName=Cluster0"
 );

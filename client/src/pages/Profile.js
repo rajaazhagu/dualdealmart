@@ -10,7 +10,6 @@ import { clearUser } from '../slices/authSlice';
 
 const Profile = ({user,setUser}) => {
   const fileRef = useRef(null);
-  console.log(user)
   const Navigate =useNavigate()
   const [file, setFile] = useState(null);
   const [list,setList] = useState([])
