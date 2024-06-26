@@ -49,7 +49,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <div>
-        {list.length >0 ? <Header user={user} setSearch={setSearch} search={search} /> : " "}
+      {list.length >0 ? <Header user={user} setSearch={setSearch} search={search} /> : " "}
         <Routes>
           <Route path='/' element={<Home list={list.filter((single) => single.address.toLowerCase().includes(search.toLowerCase()) || single.name.toLowerCase().includes(search.toLowerCase()))} user={user} />} />
           <Route path='/sign-in' element={<Signin user={user} setUser={setUser} setFetch={setFetch} fetch={fetch} />} />
