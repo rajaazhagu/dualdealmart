@@ -1,13 +1,24 @@
 import { getStorage, uploadBytesResumable,ref, getDownloadURL} from 'firebase/storage'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { app } from '../firebase'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { load } from '@cashfreepayments/cashfree-js';
-
+import emailjs from 'emailjs-com';
 
 const Premium = ({user,setFetch,fetch}) => {
+    const [toemail,setToemail] = useState([])
+    useEffect(()=>{
+        let data=[]
+      axios.get("http://localhost:3002/all/active")
+      .then((res)=>{
+        for(let i=0;i<res.data.length;i++){
+           data.push(res.data[i].email)
+        }
+      })
+      setToemail(data)
+    },[])
     const [orderId, setOrderId] = useState('');
     const [files,setFiles]=useState([])
     const [filePer, setFilePer] = useState(0);
@@ -100,6 +111,23 @@ const Premium = ({user,setFetch,fetch}) => {
                 setFetch(!fetch)
                 navigate('/');
                 toast.success('Listing successful');
+                toemail.forEach((toEmail) => {
+                    const templateParams = {
+                      to_name: toEmail,
+                      subject: `Regarding ${user.email} listing`,
+                      message: `
+                        <p>DualDealMart present ${user.email} Listing</p>
+                        <img src="${formData.imageURLs[0]}" alt="Image" style="max-width: 100%; height: auto;" />
+                      `,
+                    };
+              
+                    emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
+                      .then((response) => {
+                        console.log("success");
+                      }, (error) => {
+                        console.error(error);
+                      });
+                  });
               }
             });
           }

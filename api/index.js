@@ -90,6 +90,7 @@ app.use('/pay',route)
 //app.use('/count',route)
 app.use('/review',route)
 app.use('/total',route)
+app.use('/all',route)
 
 app.get("/ping", (req, res) => {
   res.send("Ping received");

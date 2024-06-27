@@ -17,6 +17,7 @@ router.post("/month",userController.payMonth)
 //router.post("/update",userController.countUpdate)
 router.post("/change",userController.reviewUpdate)
 router.post("/review",userController.TotalReview)
+router.get("/active",userController.getUsers)
 
 
 module.exports = router

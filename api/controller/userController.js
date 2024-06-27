@@ -190,5 +190,10 @@ const TotalReview =(async(req,res)=>{
   }
 })
 
+const getUsers=(async(req,res)=>{
+   const data = await User.find({})
+   res.json(data)
+})
 
-module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview,createPremium}
+
+module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview,createPremium,getUsers}
