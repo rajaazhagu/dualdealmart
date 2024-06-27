@@ -102,7 +102,7 @@ const Profile = ({user,setUser}) => {
        .then((res)=>{
            if(res.data==='deleted'){
             toast.success("Profile deleted")
-            Navigate('/sign-in')
+            handleSignout()
             handleFetch()
            }
            else{

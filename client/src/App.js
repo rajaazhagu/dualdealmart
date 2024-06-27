@@ -18,6 +18,7 @@ import Refund from './pages/Refund';
 import { Provider } from 'react-redux';
 import store from './store';
 import { setuser } from './slices/authSlice';
+import Premium from './pages/Premium';
 
 
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
           <Route path='/privacypolicy' element={<PrivacyPolicy />} />
           <Route path='/termsandcondition' element={<TermsConditions />} />
           <Route path='/refund' element={<Refund />} />
+          <Route path='/premium-listing' element={<Premium user={user} fetch={fetch} setFetch={setFetch} />} />
         </Routes>
       </div>
     </Provider>

@@ -76,7 +76,7 @@ const Home = ({list,user}) => {
       <div className='flex flex-row h-90 sm:flex-row'>
         {offer.slice(0).reverse().map((single) => (
           <Link to={`/listing/${single._id}`} key={single._id}>
-            <div className='shadow-lg border h-50 border-slate-200 bg-white rounded-lg mx-7 flex flex-col gap-1'>
+            <div className='shadow-lg border h-50 border-slate-200 bg-white rounded-lg mx-7 flex flex-col gap-1 my-2'>
               <img className='w-80 h-80 sm:w-40 h-40 self-center rounded-lg shadow-lg z-5' src={single.imageURLs[0]} alt='Offer' />
               <h1 className='text-slate-600 text-center'>
                 <span className='text-black text-1xl font-bold'>Category : </span>

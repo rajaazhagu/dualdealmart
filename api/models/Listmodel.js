@@ -51,7 +51,20 @@ const ListSchema = new mongoose.Schema({
     totalReview:{
         type:Number,
         default:0
+    },
+    date:{
+        type:Number,
+        required:false
+    },
+    month:{
+        type:Number,
+        required:false
+    },
+    year:{
+        type:Number,
+        required:false
     }
+
 
 },{timestamps:true})
 

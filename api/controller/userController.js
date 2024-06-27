@@ -122,6 +122,12 @@ const createList =(async(req,res)=>{
   await listCreate.save()
   res.json('created')
 })
+const createPremium =(async(req,res)=>{
+  const {email,name,description,address,type,offer,price,discountprice,imageURLs,phone,date,month,year}=req.body
+  const listCreate = new List({email,name,description,address,type,offer,price,discountprice,imageURLs,phone,date,month,year})
+  await listCreate.save()
+  res.json('created')
+})
 
 const getList = async (req, res) => {
   try {
@@ -133,6 +139,8 @@ const getList = async (req, res) => {
     res.status(500).json({ success: false, message: 'An error occurred while fetching the lists', error: error.message });
   }
 };
+
+
 
 const deleteList=(async(req,res)=>{
     const {id} =req.body
@@ -183,4 +191,4 @@ const TotalReview =(async(req,res)=>{
 })
 
 
-module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview}
+module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview,createPremium}

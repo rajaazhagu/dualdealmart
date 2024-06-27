@@ -21,13 +21,11 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch, setBuy }) =
   const param = useParams();
   const refer = useRef();
 
-  console.log(user.email)
   useEffect(() => {
     axios.get('https://dualdealmart.onrender.com/get/lists')
       .then((res) => {
         if (res.data) {
           const data = res.data.data.filter((single) => single._id === param.listingId);
-          console.log(data);
           setList(data);
           setBuy(data);
           const dataLength = data[0].userEmail.length;

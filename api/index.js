@@ -48,6 +48,31 @@ app.get("/payment", async (req, res) => {
     res.status(500).json({ error: "Failed to create order" });
   }
 });
+app.get("/list-pay", async (req, res) => {
+  try {
+    const orderId = getOrderId();
+    
+    // Payment request payload
+    const request = {
+      order_amount: "1.00",
+      order_currency: "INR",
+      order_id: orderId,
+      customer_details: {
+        customer_id: '1234erd',
+        customer_phone: "9999999999",
+        customer_name: "dual",
+        customer_email: "Dual@gmail.com"
+      }
+    };
+
+    // Call Cashfree PGCreateOrder method
+    const response = await Cashfree.PGCreateOrder("2023-08-01", request);
+    res.json(response.data); // Return response to client
+  } catch (error) {
+    console.error("Error creating order:", error);
+    res.status(500).json({ error: "Failed to create order" });
+  }
+});
 
 // Ensure routes are correctly mounted
 app.use("/api", route);
@@ -58,6 +83,7 @@ app.use("/detail", route);
 app.use('/update',route)
 app.use('/delete',route)
 app.use('/Create',route)
+app.use('/Creating',route)
 app.use('/get',route)
 app.use('/lists',route)
 app.use('/pay',route)

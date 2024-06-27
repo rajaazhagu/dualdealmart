@@ -4,9 +4,11 @@ import { app } from '../firebase'
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { load } from '@cashfreepayments/cashfree-js';
 
 
-const CreateListing = ({user,setFetch,fetch}) => {
+const Premium = ({user,setFetch,fetch}) => {
+    const [orderId, setOrderId] = useState('');
     const [files,setFiles]=useState([])
     const [filePer, setFilePer] = useState(0);
     const [formData,setFormData] = useState({ email:user.email,type:'rent',offer:false,imageURLs:[]})
@@ -61,31 +63,49 @@ const CreateListing = ({user,setFetch,fetch}) => {
         setFormData({...formData,[e.target.id]:e.target.value})
         }
     })
+    const getSessionId = async () => {
+        try {
+          const res = await axios.get("http://localhost:3002/list-pay");
+          if (res.data && res.data.payment_session_id) {
+            setOrderId(res.data.order_id); // Update orderId state
+            return res.data.payment_session_id;
+          }
+        } catch (error) {
+          console.error('Error fetching sessionId:', error);
+        }
+      };
+
     const handleSubmit=(async(e)=>{
-        e.preventDefault()
-       try {
-        if(formData.imageURLs.length===0){
-            toast.error('upload atleast one image')
-            return
-        }
-        else if(formData.price<formData.discountprice){
-              toast.error("price should be greater than discount price")
-              return
-        }
-        await axios.post("https://dualdealmart.onrender.com/create/List",formData)
-      
-        .then((res)=>{
-            if(res.data==='created'){
-                toast.success('List created successfully')
+        e.preventDefault();
+
+        try {
+          // Load cashfree each time handleClick is called
+          const cashfree = await load({ mode: 'production' });
+    
+          const sessionId = await getSessionId();
+    
+          if (sessionId) {
+            const checkOutOptions = {
+              paymentSessionId: sessionId,
+              redirectTarget: '_modal'
+            };
+    
+            cashfree.checkout(checkOutOptions).then(async (response) => {
+              if (response.paymentDetails.paymentMessage === 'Payment finished. Check status.') {
+                const dateMonth = new Date();
+                const date = dateMonth.getDate();
+                const month = dateMonth.getMonth() + 1;
+                const year = dateMonth.getFullYear();
+                await axios.post("http://localhost:3002/creating/premium",{ ...formData,date,month,year });
                 setFetch(!fetch)
-            }
-            else{
-                toast.error('not created')
-            }
-        })
-       } catch (error) {
-         toast.error(error)
-       }
+                navigate('/');
+                toast.success('Listing successful');
+              }
+            });
+          }
+        } catch (error) {
+          console.error('Error during checkout:', error);
+        }
     })
    
   return (
@@ -140,15 +160,12 @@ const CreateListing = ({user,setFetch,fetch}) => {
                         <button type='button' onClick={(()=>handleRemove(index))} className='p-3 text-red-600 rounded-lg uppercase hover:opacity-95'>Delete</button>
                     </div>)):<p className='text-center'>uploading {filePer}% wait until image dispaly below</p>
                 }
-                <button className='p-3 bg-slate-600 text-white rounded-lg uppercase'>Create Listing for free</button>
-                <h1 className='text-center font-bold'>or</h1>
-                <h1 className='font-semibold'><span className='text-xl font-semibold'>Note :</span>Premium listing can notify all users with your listings through mail and appear in top products!!</h1>
-                <button onClick={(()=>navigate('/premium-listing'))} type='button' className='p-3 bg-red-700 text-white rounded-lg uppercase'>Premium pack</button>
-            </div>
+                <button className='p-3 bg-red-700 text-white rounded-lg uppercase'>Pay and continue</button>
+                </div>
         </form>
         
     </div>
   )
 }
 
-export default CreateListing
+export default Premium
