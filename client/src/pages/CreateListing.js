@@ -78,6 +78,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
             if(res.data==='created'){
                 toast.success('List created successfully')
                 setFetch(!fetch)
+                navigate('/')
             }
             else{
                 toast.error('not created')
@@ -146,7 +147,7 @@ const CreateListing = ({user,setFetch,fetch}) => {
                 <button onClick={(()=>navigate('/premium-listing'))} type='button' className='p-3 bg-red-700 text-white rounded-lg uppercase'>Premium pack</button>
             </div>
         </form>
-        
+         
     </div>
   )
 }

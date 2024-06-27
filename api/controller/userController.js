@@ -195,5 +195,10 @@ const getUsers=(async(req,res)=>{
    res.json(data)
 })
 
+const updateList=(async(req,res)=>{
+  const {id,name,email,description,address,type,offer,price,discountprice} =req.body
+  await List.updateOne({_id:id},{$set:{name:name,email:email,description:description,address:address,type:type,offer:offer,price:price,discountprice:discountprice}})
+  res.json("updated")
+})
 
-module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview,createPremium,getUsers}
+module.exports ={user,userSignin,userGoogle,userAuth,userGet,userUpdate,userDelete,createList,getList,deleteList,payMonth,reviewUpdate,TotalReview,createPremium,getUsers,updateList}

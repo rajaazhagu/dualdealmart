@@ -91,6 +91,7 @@ app.use('/pay',route)
 app.use('/review',route)
 app.use('/total',route)
 app.use('/all',route)
+app.use('/updating',route)
 
 app.get("/ping", (req, res) => {
   res.send("Ping received");

@@ -234,7 +234,7 @@ const Profile = ({user,setUser}) => {
        : <button onClick={(()=>{handleShow()})} className='text-green-700 w-full'>Show Listings</button>
        }
        {list.length >0 && list.map((single)=>(
-        <div key={single._id} className='border p-3 flex  items-center rounded-lg gap-4 sm:gap-20'>
+        <div key={single._id} className='border p-3 flex  items-center justify-between rounded-lg gap-4 sm:gap-20'>
             <Link to ={`/listing/${single._id}`}>
               <img className='h-20 w-20 object-contain' src={single.imageURLs[0]} alt='listsimage' />
             </Link>
@@ -242,6 +242,7 @@ const Profile = ({user,setUser}) => {
               <p className='font-semibold text-slate-700 hover:underline'>{single.name}</p>
             </Link>
               <button className='text-red-700' type='buttton' onClick={(()=>{handleDeleteList(single._id)})}>Delete</button>
+             <Link to={`/updatelisting/${single._id}`}> <button className='text-blue-700' type='buttton'>Edit</button> </Link>
         </div>
       ))}
     </div>
