@@ -65,7 +65,7 @@ const Premium = ({user,setFetch,fetch}) => {
     })
     const getSessionId = async () => {
         try {
-          const res = await axios.get("http://localhost:3002/list-pay");
+          const res = await axios.get("https://dualdealmart.onrender.com/list-pay");
           if (res.data && res.data.payment_session_id) {
             setOrderId(res.data.order_id); // Update orderId state
             return res.data.payment_session_id;
@@ -96,7 +96,7 @@ const Premium = ({user,setFetch,fetch}) => {
                 const date = dateMonth.getDate();
                 const month = dateMonth.getMonth() + 1;
                 const year = dateMonth.getFullYear();
-                await axios.post("http://localhost:3002/creating/premium",{ ...formData,date,month,year });
+                await axios.post("https://dualdealmart.onrender.com/creating/premium",{ ...formData,date,month,year });
                 setFetch(!fetch)
                 navigate('/');
                 toast.success('Listing successful');
