@@ -100,32 +100,12 @@ const Premium = ({ user, setFetch, fetch }) => {
     }
   };
   
-  const emailSent=(()=>{
-    toemail.forEach((toEmail, index) => {
-        setTimeout(() => {
-          const templateParams = {
-            from_name: user.email,
-            to_name: toEmail,
-            message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
-          };
-
-          emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
-            .then((response) => {
-              toast.success("Email sent successfully");
-              console.log('hi')
-            })
-            .catch((error) => {
-              toast.error("Failed to send email");
-            });
-        }, index * 1000); 
-      });
-  })
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        await emailSent();
       const cashfree = await load({ mode: 'production' });
       const sessionId = await getSessionId();
 
