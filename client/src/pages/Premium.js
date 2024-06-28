@@ -33,17 +33,18 @@ const Premium = ({ user, setFetch, fetch }) => {
   }, []);
 
   const handleImageSubmit = () => {
-    if (files.length > 0 && files.length + formData.imageURLs.length < 7) {
-      const promises = files.map(storeImage);
-
-      Promise.all(promises).then((urls) => {
-        setFormData({ ...formData, imageURLs: formData.imageURLs.concat(urls) });
-      }).catch(error => {
-        console.error('Error uploading images:', error);
-      });
-    } else {
-      toast.error('Upload at least 6 images.');
-    }
+    if(files.length >0 && files.length + formData.imageURLs.length < 7){
+        const promise =[]
+        for(let i=0 ;i<files.length;i++){
+            promise.push(storeImage(files[i]))
+        }
+     Promise.all(promise).then((urls)=>{
+        setFormData({...formData,imageURLs:formData.imageURLs.concat(urls)})
+     })
+     }
+     else{
+        toast.error('minimum 6 images only upload')
+     }
   };
 
   const storeImage = (file) => {
