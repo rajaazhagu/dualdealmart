@@ -99,29 +99,32 @@ const Premium = ({ user, setFetch, fetch }) => {
       console.error('Error fetching sessionId:', error);
     }
   };
+  
+  const emailSent=(()=>{
+    toemail.forEach((toEmail, index) => {
+        setTimeout(() => {
+          const templateParams = {
+            from_name: user.email,
+            to_name: toEmail,
+            message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
+          };
+
+          emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
+            .then((response) => {
+              console.log("Email sent successfully:", response.text);
+            })
+            .catch((error) => {
+              console.error("Failed to send email:", error);
+            });
+        }, index * 4000); 
+      });
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-        toemail.forEach((toEmail, index) => {
-            setTimeout(() => {
-              const templateParams = {
-                from_name: user.email,
-                to_name: toEmail,
-                message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
-              };
-
-              emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
-                .then((response) => {
-                  console.log("Email sent successfully:", response.text);
-                })
-                .catch((error) => {
-                  console.error("Failed to send email:", error);
-                });
-            }, index * 4000); 
-          });
-        
+        await emailSent();
       const cashfree = await load({ mode: 'production' });
       const sessionId = await getSessionId();
 
