@@ -159,7 +159,7 @@ const Premium = ({ user, setFetch, fetch }) => {
   return (
     <div className='p-3 max-w-4xl mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Create Listing</h1>
-      <form className='flex flex-col sm:flex-row gap-10' onSubmit={handleSubmit}>
+      <form className='flex flex-col sm:flex-row gap-10' onSubmit={((e)=>handleSubmit(e))}>
         <div className='flex flex-col gap-4 flex-1'>
           <input type='text' placeholder='Name' id='name' required className='border p-3 rounded-lg' onChange={handleChange} />
           <textarea type='text' placeholder='Description of your item' id='description' required className='border p-3 rounded-lg' onChange={handleChange} />
@@ -209,7 +209,7 @@ const Premium = ({ user, setFetch, fetch }) => {
               </div>
             )) : <p className='text-center'>Uploading {filePer}%... Please wait until image displays below.</p>
           }
-          <button type='submit' className='p-3 bg-red-700 text-white rounded-lg uppercase'>Pay and Continue</button>
+          <button className='p-3 bg-red-700 text-white rounded-lg uppercase'>Pay and Continue</button>
         </div>
       </form>
     </div>
