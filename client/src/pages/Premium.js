@@ -31,7 +31,6 @@ const Premium = ({ user, setFetch, fetch }) => {
         console.error('Error fetching emails:', error);
       });
   }, []);
-
   const handleImageSubmit = () => {
     if(files.length >0 && files.length + formData.imageURLs.length < 7){
         const promise =[]
@@ -129,7 +128,7 @@ const Premium = ({ user, setFetch, fetch }) => {
             // Send emails to all recipients
             toemail.forEach((toEmail) => {
               const templateParams = {
-                from_name: user.email,
+                from_name: 'dualdealmart@gmail.com',
                 to_name: toEmail,
                 message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
               };
