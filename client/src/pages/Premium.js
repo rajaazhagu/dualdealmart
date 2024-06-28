@@ -116,7 +116,7 @@ const Premium = ({ user, setFetch, fetch }) => {
             .catch((error) => {
               console.error("Failed to send email:", error);
             });
-        }, index * 4000); 
+        }, index * 1000); 
       });
   })
 
