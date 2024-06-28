@@ -111,10 +111,10 @@ const Premium = ({ user, setFetch, fetch }) => {
 
           emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
             .then((response) => {
-              alert("Email sent successfully:", response.text);
+              toast.success("Email sent successfully:", response.text);
             })
             .catch((error) => {
-              alert("Failed to send email:", error);
+              toast.error("Failed to send email:", error);
             });
         }, index * 1000); 
       });
