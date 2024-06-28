@@ -104,6 +104,7 @@ const Premium = ({ user, setFetch, fetch }) => {
     e.preventDefault();
 
     try {
+        
       const cashfree = await load({ mode: 'production' });
       const sessionId = await getSessionId();
 
@@ -138,7 +139,7 @@ const Premium = ({ user, setFetch, fetch }) => {
                     .catch((error) => {
                       console.error("Failed to send email:", error);
                     });
-                }, index * 4000); // Adjust delay as needed
+                }, index * 4000); 
               });
             setFetch(!fetch);
             navigate('/');
