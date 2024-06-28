@@ -67,7 +67,7 @@ const App = () => {
           <Route path='/termsandcondition' element={<TermsConditions />} />
           <Route path='/refund' element={<Refund />} />
           <Route path='/premium-listing' element={<Premium user={user} fetch={fetch} setFetch={setFetch} />} />
-          <Route path='/updatelisting/:listingId' element={<UpdateListing list={list} fetch={fetch} setFetch={setFetch}  user={user}/>} />
+          <Route path='/update-listing/:listingId' element={<UpdateListing list={list} fetch={fetch} setFetch={setFetch}  user={user}/>} />
         </Routes>
       </div>
     </Provider>

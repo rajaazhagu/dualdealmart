@@ -22,7 +22,7 @@ const Premium = ({ user, setFetch, fetch }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("http://localhost:3002/all/active")
+    axios.get("https://dualdealmart.onrender.com/all/active")
       .then((res) => {
         let data = res.data.map(item => item.email);
         setToemail(data);
@@ -100,7 +100,25 @@ const Premium = ({ user, setFetch, fetch }) => {
     }
   };
   
-  
+  const emailSent=(()=>{
+    toemail.forEach((toEmail, index) => {
+        setTimeout(() => {
+          const templateParams = {
+            from_name: user.email,
+            to_name: toEmail,
+            message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
+          };
+
+          emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
+            .then((response) => {
+              console.log(response)
+            })
+            .catch((error) => {
+                console.log(error)
+             });
+        }, index * 1000); 
+      });
+  })
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,8 +142,7 @@ const Premium = ({ user, setFetch, fetch }) => {
 
             await axios.post("https://dualdealmart.onrender.com/creating/premium", { ...formData, date, month, year });
            
-            // Send emails to all recipients
-            
+            await emailSent();
             setFetch(!fetch);
             navigate('/');
             toast.success('Listing successful');
