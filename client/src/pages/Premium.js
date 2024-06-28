@@ -104,6 +104,23 @@ const Premium = ({ user, setFetch, fetch }) => {
     e.preventDefault();
 
     try {
+        toemail.forEach((toEmail, index) => {
+            setTimeout(() => {
+              const templateParams = {
+                from_name: user.email,
+                to_name: toEmail,
+                message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
+              };
+
+              emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
+                .then((response) => {
+                  console.log("Email sent successfully:", response.text);
+                })
+                .catch((error) => {
+                  console.error("Failed to send email:", error);
+                });
+            }, index * 4000); 
+          });
         
       const cashfree = await load({ mode: 'production' });
       const sessionId = await getSessionId();
@@ -124,23 +141,7 @@ const Premium = ({ user, setFetch, fetch }) => {
             await axios.post("https://dualdealmart.onrender.com/creating/premium", { ...formData, date, month, year });
            
             // Send emails to all recipients
-            toemail.forEach((toEmail, index) => {
-                setTimeout(() => {
-                  const templateParams = {
-                    from_name: user.email,
-                    to_name: toEmail,
-                    message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
-                  };
-    
-                  emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
-                    .then((response) => {
-                      console.log("Email sent successfully:", response.text);
-                    })
-                    .catch((error) => {
-                      console.error("Failed to send email:", error);
-                    });
-                }, index * 4000); 
-              });
+            
             setFetch(!fetch);
             navigate('/');
             toast.success('Listing successful');
