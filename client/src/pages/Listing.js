@@ -108,6 +108,7 @@ const Listing = ({ user, userRating, setUserRating, setFetch, fetch, setBuy }) =
           {list[0].type === 'sell' && user &&
             <div className='flex justify-center'>
               <Link to="/buy"><button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>Buy Now</button></Link>
+              <Link to="/seller/azhagu"><button className='bg-orange-600 text-white rounded-md mb-3 my-2 w-40 h-10'>insta</button></Link>
             </div>
           }
           <div className='flex justify-center gap-4 w-100'>

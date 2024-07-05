@@ -27,8 +27,6 @@ const Signin = ({setFetch,fetch}) => {
     try {
       const response = await axios.post('https://dualdealmart.onrender.com/user/signin', formData);
       const { user, token } = response.data; 
-
-     
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       dispatch(setuser(user));

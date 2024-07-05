@@ -2,6 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 
 const Home = ({list,user}) => {
@@ -53,6 +56,16 @@ const Home = ({list,user}) => {
     }
   },[user])*/
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
+
   useEffect(()=>{
     const offerProducts = list.filter((single)=>single.offer===true)
     const noofferProducts = list.filter((single)=>single.offer!==true && !single.date)
@@ -72,6 +85,19 @@ const Home = ({list,user}) => {
           <h2 className='font-semibold text-xl'>Pay <span className='text-black'>one </span> time for unlimited listings</h2><span className='text-black font-bold my-2 text-xl'>Rent it,Own it,Love it...</span>
         </div>
       </div>
+
+      <Slider {...settings}>
+      {premium.map((image, index) => (
+        <Link to={`/listing/${image._id}`}>
+     <img
+        className='hidden lg:block max-w-[700px] mx-auto max-h-[200px] rounded-lg shadow-lg sm:w-0 sm:h-0'
+        src={image.imageURLs[0]}
+        alt='Offer'
+      />    
+    </Link>
+      ))}
+    </Slider>
+
       <h1 className='flex justify-center font-bold text-slate-700 drop-shadow-2 text-2xl my-4'>Top products !!</h1>
       {
   premium.length > 0 ? (
