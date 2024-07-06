@@ -85,7 +85,7 @@ const Home = ({list,user}) => {
           <h2 className='font-semibold text-xl'>Pay <span className='text-black'>one </span> time for unlimited listings</h2><span className='text-black font-bold my-2 text-xl'>Rent it,Own it,Love it...</span>
         </div>
       </div>
-      <div className='h-50 max-w[400px] mx-auto ml-4 bg-slate-300 rounded-lg shadow-lg  sm:hidden'>
+      <div>
       <Slider {...settings}>
       {premium.map((image, index) => (
         <Link to={`/listing/${image._id}`}>
