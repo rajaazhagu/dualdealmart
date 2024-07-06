@@ -85,18 +85,20 @@ const Home = ({list,user}) => {
           <h2 className='font-semibold text-xl'>Pay <span className='text-black'>one </span> time for unlimited listings</h2><span className='text-black font-bold my-2 text-xl'>Rent it,Own it,Love it...</span>
         </div>
       </div>
-
+      <div className='h-50 max-w[400px] mx-auto ml-4 bg-slate-300 rounded-lg shadow-lg  sm:hidden'>
       <Slider {...settings}>
       {premium.map((image, index) => (
         <Link to={`/listing/${image._id}`}>
      <img
-        className='hidden lg:block max-w-[700px] mx-auto max-h-[200px] rounded-lg shadow-lg sm:w-0 sm:h-0'
+        className='hidden lg:block max-w-[500px] mx-auto max-h-[200px] my-2 rounded-lg shadow-lg sm:w-0 sm:h-0'
         src={image.imageURLs[0]}
         alt='Offer'
-      />    
+      />
+      <p className='text-center text-black font-semibold drop-shadow-lg'>{image.name}</p>    
     </Link>
       ))}
     </Slider>
+    </div>
 
       <h1 className='flex justify-center font-bold text-slate-700 drop-shadow-2 text-2xl my-4'>Top products !!</h1>
       {
