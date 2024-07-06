@@ -109,7 +109,7 @@ const Premium = ({ user, setFetch, fetch }) => {
             message: `${user.name} listed a product ${formData.name} for ${formData.type} and image is ${formData.imageURLs[0]} and for query call ${formData.phone}`,
           };
 
-          emailjs.send('service_y7xj0zf', 'template_idu1t8y', templateParams, 'kAmXiNVYiUnGKFlVQ')
+          emailjs.send('service_lsp9az4', 'template_203a5dm', templateParams, '0-PaGrM7Hy-lx9Q5v')
             .then((response) => {
               console.log(response)
             })
