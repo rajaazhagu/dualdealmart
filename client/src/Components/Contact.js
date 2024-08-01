@@ -6,7 +6,7 @@ const Contact = ({list}) => {
     const [message,setMessage] = useState('')
   return (
     <div className='h-30'>
-        <p className='font-semibold ml-1'>Contact:{list[0].email}</p>
+        <p className='font-semibold ml-1'>Contact Detail:{list[0].email}</p>
         <textarea name='message' id='message' rows='2' value={message} onChange={((e)=>setMessage(e.target.value))} placeholder='Enter your meesage here' required className='w-full border p-3 rounded-lg'/>
         <Link to={`mailto:${list[0].email}?subject=Regarding ${list[0].name}&body=${message}`} className='h-10'>
             <div className='flex gap-1 ml-20'>
